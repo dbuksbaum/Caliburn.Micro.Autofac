@@ -1,0 +1,13 @@
+bin
+obj
+build
+dist
+*.suo
+*.user
+*.cache
+*.bak
+*.pdb
+desktop.ini
+Old/
+_ReSharper.*
+# shared files taken from elsewhere in the environment
