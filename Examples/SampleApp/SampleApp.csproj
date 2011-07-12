@@ -105,12 +105,6 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Caliburn.Micro.Autofac\Caliburn.Micro.Autofac.csproj">
-      <Project>{E2D4682D-D053-4A01-800E-9684D0A9EC64}</Project>
-      <Name>Caliburn.Micro.Autofac</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
