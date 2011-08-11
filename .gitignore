@@ -1,13 +1,17 @@
-bin
-obj
-build
-dist
+[Bb]in
+[Bb]uild
+[Dd]ebug
+[Dd]ist
+[Oo]bj
+[Oo]ld
+[Rr]elease
+*.bak
+*.cache
+*.docstates
+*.nupkg
+*.pdb
 *.suo
 *.user
-*.cache
-*.bak
-*.pdb
 desktop.ini
-Old/
 _ReSharper.*
 # shared files taken from elsewhere in the environment

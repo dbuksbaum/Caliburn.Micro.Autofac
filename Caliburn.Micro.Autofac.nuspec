@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Caliburn.Micro.Autofac</id>
+    <version>1.1</version>
+    <title>Caliburn.Micro.Autofac</title>
+    <authors>David Buksbaum</authors>
+    <owners />
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://buksbaum.us/2011/07/11/caliburn-micro-autofac-1-1-released/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides an Autofac enabled bootstrapper for Caliburn.Micro.</description>
+    <summary>Integration of Caliburn.Micro with Autofac. Source code with sample projects available at https://github.com/dbuksbaum/Caliburn.Micro.Autofac</summary>
+    <tags>Caliburn.Micro Autofac IoC DI MVVM</tags>
+    <dependencies>
+      <dependency id="Caliburn.Micro" version="1.2.0" />
+      <dependency id="Autofac" version="2.5.1.827" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\net40\Caliburn.Micro.Autofac.dll" target="lib\net40\Caliburn.Micro.Autofac.dll" />
+    <file src="lib\sl40\Caliburn.Micro.Autofac.dll" target="lib\sl40\Caliburn.Micro.Autofac.dll" />
+    <file src="lib\sl3-wp\Caliburn.Micro.Autofac.dll" target="lib\sl3-wp\Caliburn.Micro.Autofac.dll" />
+  </files>
+</package>
