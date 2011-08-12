@@ -137,7 +137,7 @@ param(
 	$v4_net_version = (ls "$env:windir\Microsoft.NET\Framework\v4.0*").Name
 	#exec { &"c:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" ""$slnFile"" /v:m /t:Rebuild /p:OutDir=""$$outputDir\"" }
 	Write-Host "/p:OutDir=""$outputDir\"""
-	exec { &"C:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" ""$slnFile"" /v:$verbosity /t:$target /p:OutDir=""$outputDir\"" }
+	exec { "C:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe `"$slnFile`" /v:$verbosity /t:$target /p:OutDir=`"$outputDir\`"" }
 }
 
 function Build-Project {
@@ -166,11 +166,11 @@ param(
 	Write-Host "target: $target"
 	Write-Host "verbosity: $verbosity"
 	
-	exec { &"MSBuild.exe" ""$projectFile"" /v:$verbosity }
+	#exec { &"MSBuild.exe" "'"$projectFile'" /v:$verbosity" }
 
-	#Write-Host "MSBuild.exe ""$projectFile"" /p:OutDir=""$outputDir\"" /t:$target /v:$verbosity /p:Configuration=$configuration"
-	#exec { &"MSBuild.exe" ""$projectFile"" /p:OutDir=""$outputDir\"" /t:$target /v:$verbosity /p:Configuration=$configuration }
-# exec { &"C:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" /t:$target /v:$verbosity /p:OutDir=""$outputDir\"" ""$projectName"" }
+	#Write-Host "MSBuild.exe `"$projectFile`" /p:OutDir=`"$outputDir\`" /t:$target /v:$verbosity /p:Configuration=$configuration"
+	#exec { &"MSBuild.exe" `"$projectFile`" /p:OutDir=`"$outputDir\`" /t:$target /v:$verbosity /p:Configuration=$configuration }
+    # exec { &"C:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" /t:$target /v:$verbosity /p:OutDir=`"$outputDir\`" `"$projectName`" }
 
   #cd $old
 }

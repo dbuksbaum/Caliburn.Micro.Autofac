@@ -2,10 +2,10 @@ properties {
   $base_dir  = resolve-path .
   $build_dir = "$base_dir\build"
   $buildartifacts_dir = "$build_dir"
- 	$config = "Debug"
+  $config = "Debug"
 #	$lib_dir = "$base_dir\SharedLibs"
-	$nuget_packages_dir = "$base_dir\packages"
-	$sln_base = "Caliburn.Micro.Autofac"
+  $nuget_packages_dir = "$base_dir\packages"
+  $sln_base = "Caliburn.Micro.Autofac"
   $sln_file = "$base_dir\$sln_base.sln"
   $target = "Rebuild"
   $verbosity = "m"
@@ -16,12 +16,12 @@ properties {
   $tools_dir = "$base_dir\tools"
   $release_dir = "$base_dir\release"
 #  $uploader = "..\Uploader\S3Uploader.exe"
-	$v4_net_version = (ls "$env:windir\Microsoft.NET\Framework\v4.0*").Name
-	$project_base = "$src_dir\$sln_base"
+  $v4_net_version = (ls "$env:windir\Microsoft.NET\Framework\v4.0*").Name
+  $project_base = "$src_dir\$sln_base"
 
-	$project_dlls = @( "Caliburn.Micro.Autofac.dll" );
-	$platforms = @( "NET4", "SL4", "WP7" );
-	$nupack_dirs = @(	"NuPack", "NuPack\content", "NuPack\lib", "NuPack\lib\net40", "NuPack\lib\sl40", "NuPack\lib\sl3-wp" );
+  $project_dlls = @( "Caliburn.Micro.Autofac.dll" );
+  $platforms = @( "NET4", "SL4", "WP7" );
+  $nupack_dirs = @(	"NuPack", "NuPack\content", "NuPack\lib", "NuPack\lib\net40", "NuPack\lib\sl40", "NuPack\lib\sl3-wp" );
 }
 
 include .\psake_ext.ps1
@@ -53,8 +53,7 @@ task PublishToNuget -depends CreateNugetPackage {
   $accessKey = Get-Content $accessPath
   $accessKey = $accessKey.Trim()
   
-
-	&"nuget" push -source http://packages.nuget.org/v1/ "$sln_base.$version.nupkg" $accessKey
+  #exec { "nuget" "push -source http://packages.nuget.org/v1/ `"$sln_base.$version.nupkg`" $accessKey" }
 }
 
 task CreateNugetPackage -depends Release {
@@ -74,15 +73,14 @@ task CreateNugetPackage -depends Release {
 	remove-item $build_dir\Nupack -force -recurse -erroraction silentlycontinue
 
   foreach($nupack_dir in $nupack_dirs) {
-		new-item "$build_dir\$nupack_dir" -itemType directory -ErrorAction SilentlyContinue
-	}
+    new-item "$build_dir\$nupack_dir" -itemType directory -ErrorAction SilentlyContinue
+  }
 
-	cp $build_dir\NET4\*.dll $build_dir\Nupack\lib\net40
-	cp $build_dir\SL4\*.dll $build_dir\Nupack\lib\sl40
-	cp $build_dir\WP7\*.dll $build_dir\Nupack\lib\sl3-wp
+  cp $build_dir\NET4\*.dll $build_dir\Nupack\lib\net40
+  cp $build_dir\SL4\*.dll $build_dir\Nupack\lib\sl40
+  cp $build_dir\WP7\*.dll $build_dir\Nupack\lib\sl3-wp
 	
-	########### Caliburn.Micro.Autofac.nupkg
-
+  ########### Caliburn.Micro.Autofac.nupkg
   $nupack = [xml](get-content $base_dir\$sln_base.nuspec)
 	
   $nupack.package.metadata.version = "$version"
@@ -98,16 +96,16 @@ task CreateNugetPackage -depends Release {
   $writer.Flush()
   $writer.Close()
   
-  &"nuget" pack $build_dir\NuPack\$sln_base.nuspec
+  exec { &"nuget" "pack $build_dir\NuPack\$sln_base.nuspec" }
 }
 
 task Release -depends CopyBuildFiles {
-	$global:commercial = $false
-	$global:uploadCategory = "Caliburn.Micro.Autofac"
+  $global:commercial = $false
+  $global:uploadCategory = "Caliburn.Micro.Autofac"
 }
 
 task Samples -depends CopyBuildFiles {
-	exec { &"c:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" ""$samples_sln_file"" /v:$verbosity /t:$target /p:Configuration=$config }
+  exec { &"c:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" "`"$samples_sln_file`" /v:$verbosity /t:$target /p:Configuration=$config" }
 }
 
 task Test -depends CopyBuildFiles {
@@ -116,7 +114,7 @@ task Test -depends CopyBuildFiles {
   Write-Host $test_prjs
   foreach($test_prj in $test_prjs) {
     Write-Host "Testing $build_dir\$test_prj"
-#    exec { &"$build_dir\xunit.console.clr4.exe" "$build_dir\$test_prj" } 
+#    exec { "$build_dir\xunit.console.clr4.exe" "$build_dir\$test_prj" }
   }
   cd $old
 }
@@ -131,9 +129,7 @@ task CopyBuildFiles -depends Compile {
 
 #-PreAction {"*** Pre-Test ***"} -PostAction {"*** Post-Test ***"}
 task Compile -depends Init -Action { 
-	#exec { &"c:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" ""$slnFile"" /v:m /p:Configuration=Debug /t:Rebuild /p:OutDir=""$$buildartifacts_dir\"" }
-	
-	exec { &"c:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" ""$slnFile"" /v:$verbosity /t:$target /p:Configuration=$config }
+	exec { &"c:\Windows\Microsoft.NET\Framework\$v4_net_version\MSBuild.exe" "`"$slnFile`" /v:$verbosity /t:$target /p:Configuration=$config" }
 	# /p:OutDir=""$buildartifacts_dir\\"" }
 } 
 
@@ -185,16 +181,9 @@ task Init -depends SetVsPaths, Verify40, Clean, DisplayConfig {
 	new-item $build_dir -itemType directory -ErrorAction SilentlyContinue
 	
   foreach($platform in $platforms) {
-		new-item "$build_dir\$platform" -itemType directory -ErrorAction SilentlyContinue
-		new-item "$release_dir\$platform" -itemType directory -ErrorAction SilentlyContinue
+	new-item "$build_dir\$platform" -itemType directory -ErrorAction SilentlyContinue
+	new-item "$release_dir\$platform" -itemType directory -ErrorAction SilentlyContinue
   }
-	
-	#new-item "$build_dir\NET4" -itemType directory -ErrorAction SilentlyContinue
-	#new-item "$build_dir\SL4" -itemType directory -ErrorAction SilentlyContinue
-	#new-item "$build_dir\WP7" -itemType directory -ErrorAction SilentlyContinue
-	#new-item "$release_dir\NET4" -itemType directory -ErrorAction SilentlyContinue
-	#new-item "$release_dir\SL4" -itemType directory -ErrorAction SilentlyContinue
-	#new-item "$release_dir\WP7" -itemType directory -ErrorAction SilentlyContinue
 }
 
 task SetVsPaths {
@@ -202,9 +191,9 @@ task SetVsPaths {
 }
 
 task Verify40 {
-	if( (ls "$env:windir\Microsoft.NET\Framework\v4.0*") -eq $null ) {
-		throw "Building Caliburn.Micro.Autofac requires .NET 4.0, which doesn't appear to be installed on this machine"
-	}
+  if( (ls "$env:windir\Microsoft.NET\Framework\v4.0*") -eq $null ) {
+    throw "Building Caliburn.Micro.Autofac requires .NET 4.0, which doesnt appear to be installed on this machine"
+  }
 }
 
 task Clean {
@@ -213,9 +202,9 @@ task Clean {
 }
 
 task DisplayConfig {
-	Write-Host "base_dir = $base_dir"
+  Write-Host "base_dir = $base_dir"
   Write-Host "target = $target"
-	Write-Host "config = $config"
+  Write-Host "config = $config"
   Write-Host "verbosity = $verbosity"
   Write-Host "sln_file = $sln_file"
   Write-Host "samples_sln_file = $samples_sln_file"
