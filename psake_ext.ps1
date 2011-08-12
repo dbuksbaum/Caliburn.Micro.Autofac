@@ -85,7 +85,7 @@ param(
 )
   if($env:buildlabel -eq 9999 -and (Test-Path $file))
 	{
-#		Write-Host "Suppressing Generation of Assembly Info"
+		Write-Host "Suppressing Generation of Assembly Info"
     return
 	}
 
@@ -97,9 +97,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 #if !SILVERLIGHT
-[assembly: SuppressIldasmAttribute()]
-#endif
+//[assembly: SuppressIldasmAttribute()]
 [assembly: CLSCompliantAttribute($clsCompliant )]
+#endif
 [assembly: ComVisibleAttribute(false)]
 [assembly: AssemblyTitleAttribute(""$title"")]
 [assembly: AssemblyDescriptionAttribute(""$description"")]
@@ -110,9 +110,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersionAttribute(""$version / $commit"")]
 [assembly: AssemblyFileVersionAttribute(""$fileVersion"")]
 [assembly: AssemblyDelaySignAttribute(false)]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: AssemblyConfiguration(""$configuration"")]
+[assembly: AssemblyTrademark("""")]
+[assembly: AssemblyCulture("""")]
+[assembly: AssemblyConfiguration(""$config"")]
 "
 
 	$dir = [System.IO.Path]::GetDirectoryName($file)

@@ -9,7 +9,7 @@ properties {
   $sln_file = "$base_dir\$sln_base.sln"
   $target = "Rebuild"
   $verbosity = "m"
-  $version = "1.2.0"
+  $version = "1.2.1"
   $samples_dir = "$base_dir\samples"
   $samples_sln_file = "$samples_dir\Caliburn.Micro.Autofac.Samples.sln"
   $src_dir = "$base_dir\src"
@@ -146,6 +146,8 @@ task Init -depends SetVsPaths, Verify40, Clean, DisplayConfig {
 	if($env:buildlabel -eq $null) {
 		$env:buildlabel = "9999"
 	}
+
+	Write-Host "Build Number $env:BUILD_NUMBER"
 	
 	$projectFiles = ls -path $base_dir -include *.csproj -recurse 
 # | 
@@ -153,7 +155,7 @@ task Init -depends SetVsPaths, Verify40, Clean, DisplayConfig {
 				Where { $_ -notmatch [regex]::Escape($tools_dir) }
 
 	# add list of assemblies that are not CLS compliant here
-	$notclsCompliant = @( )
+	$notclsCompliant = @( "Caliburn.Micro.Autofac-WP7" )
 	
 	foreach($projectFile in $projectFiles) {
 		$projectDir = [System.IO.Path]::GetDirectoryName($projectFile)
@@ -170,7 +172,7 @@ task Init -depends SetVsPaths, Verify40, Clean, DisplayConfig {
 		Generate-Assembly-Info `
 			-file $asmInfo `
 			-title "$projectName $version.0" `
-			-description "Integration of Autofac into Caliburn.Micro" `
+			-description "Autofac Bootstrapper for Caliburn.Micro" `
 			-company "David Buksbaum - http://buksbaum.us" `
 			-product "Caliburn.Micro.Autofac $version.0" `
 			-version "$version.0" `

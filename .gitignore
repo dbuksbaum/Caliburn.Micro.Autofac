@@ -1,17 +1,69 @@
-[Bb]in
-[Bb]uild
-[Dd]ebug
-[Dd]ist
-[Oo]bj
-[Oo]ld
-[Rr]elease
-*.bak
-*.cache
-*.docstates
-*.nupkg
+# compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
 *.pdb
+*.dll.config
+*.cache
 *.suo
-*.user
-desktop.ini
+*.nupkg
+# Include dlls if they’re in the NuGet packages directory
+!/packages/*/lib/*.dll
+# VS Upgrade stuff #
+####################
+UpgradeLog.XML
+_UpgradeReport_Files/
+# Directories #
+###############
+src/*/bin
+src/*/Bin
+bin
+Bin
+build
+Build
+debug
+Debug
+obj
+Obj
+old
+Old
+release
+Release
+TestResults
+# Web publish log #
+###################
+*.Publish.xml
+# Resharper #
+#############
 _ReSharper.*
-# shared files taken from elsewhere in the environment
+*.resharper.user
+# Packages #
+############
+# it’s better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+# Logs and databases #
+######################
+*.log
+*.sqlite
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+desktop.ini
+# other unneeded files #
+########################
+*.bak
+*.docstates
+*.user
