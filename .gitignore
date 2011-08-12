@@ -17,8 +17,6 @@ UpgradeLog.XML
 _UpgradeReport_Files/
 # Directories #
 ###############
-src/*/bin
-src/*/Bin
 bin
 Bin
 build
