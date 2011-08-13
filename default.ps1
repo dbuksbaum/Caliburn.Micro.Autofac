@@ -202,6 +202,7 @@ task Clean {
 }
 
 task DisplayConfig {
+	get-variable
   Write-Host "base_dir = $base_dir"
   Write-Host "target = $target"
   Write-Host "config = $config"
