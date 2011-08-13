@@ -202,7 +202,7 @@ task Clean {
 }
 
 task DisplayConfig {
-	Write-Host "Build Number = $env:BUILD_NUMBER"
+	Write-Host "Jenkins Build Number = $env:BUILD_NUMBER"
   Write-Host "base_dir = $base_dir"
   Write-Host "target = $target"
   Write-Host "config = $config"
