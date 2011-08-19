@@ -9,7 +9,7 @@ properties {
   $sln_file = "$base_dir\$sln_base.sln"
   $target = "Rebuild"
   $verbosity = "m"
-  $version = "1.2.1"
+  $version = "1.3.0"
   $samples_dir = "$base_dir\samples"
   $samples_sln_file = "$samples_dir\Caliburn.Micro.Autofac.Samples.sln"
   $src_dir = "$base_dir\src"
@@ -53,7 +53,7 @@ task PublishToNuget -depends CreateNugetPackage {
   $accessKey = Get-Content $accessPath
   $accessKey = $accessKey.Trim()
   
-  #exec { "nuget" "push -source http://packages.nuget.org/v1/ `"$sln_base.$version.nupkg`" $accessKey" }
+  exec { "nuget" "push -source http://packages.nuget.org/v1/ `"$sln_base.$version.nupkg`" $accessKey" }
 }
 
 task CreateNugetPackage -depends Release {
