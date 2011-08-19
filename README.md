@@ -4,6 +4,15 @@ Caliburn.Micro.Autofac
 Source code to the [Caliburn.Micro.Autofac nuget package](http://nuget.org/List/Packages/Caliburn.Micro.Autofac).
 See [blog post](http://buksbaum.us/2011/06/12/introducing-caliburn-micro-autofac/)
 
+__Version 1.3 - 2011/08/19__
+* Added AutoSubscribeEventAggegatorHandlers as a new property to AutofacBoostrapper
+  * Defaults to false to maintain backwards compatibility
+  * When true, will register the EventAggregationAutoSubscriptionModule module with Autofac
+* Added the EventAggregationAutoSubscriptionModule
+  * This module will automaticaly subscribe new instances to the registered IEventAggregator services
+  * Registration is done on activation only, so it will only happen once for singletons, and each time a non-singleton is created
+  * Registration is only done if the instance derives from the IHandle marker interface
+
 __Version 1.2.1 - 2011/08/11__
 * Fixed missing references in Caliburn.Micro.Autofac for .NET 4
 * Fixed incorrect AssemblyInfo.cs values for all projects

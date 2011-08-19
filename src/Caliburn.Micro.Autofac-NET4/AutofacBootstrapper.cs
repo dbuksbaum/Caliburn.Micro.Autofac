@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,11 @@ namespace Caliburn.Micro.Autofac
     /// <remarks>Case is important as views would not match.</remarks>
     /// </summary>
     public bool EnforceNamespaceConvention { get; set; }
+    /// <summary>
+    /// Should the IoC automatically subscribe any types found that implement the
+    /// IHandle interface at activation
+    /// </summary>
+    public bool AutoSubscribeEventAggegatorHandlers { get; set; }
     /// <summary>
     /// The base type required for a view model
     /// </summary>
@@ -84,6 +90,10 @@ namespace Caliburn.Micro.Autofac
       //  register the single event aggregator for this container
       builder.Register<IEventAggregator>(c => CreateEventAggregator()).InstancePerLifetimeScope();
 
+      //  should we install the auto-subscribe event aggregation handler module?
+      if (AutoSubscribeEventAggegatorHandlers)
+        builder.RegisterModule<EventAggregationAutoSubscriptionModule>();
+
       //  allow derived classes to add to the container
       ConfigureContainer(builder);
 
@@ -142,6 +152,8 @@ namespace Caliburn.Micro.Autofac
     protected virtual void ConfigureBootstrapper()
     { //  by default, enforce the namespace convention
       EnforceNamespaceConvention = true;
+      // default is to auto subscribe known event aggregators
+      AutoSubscribeEventAggegatorHandlers = false;
       //  the default view model base type
       ViewModelBaseType = typeof(System.ComponentModel.INotifyPropertyChanged);
       //  default window manager

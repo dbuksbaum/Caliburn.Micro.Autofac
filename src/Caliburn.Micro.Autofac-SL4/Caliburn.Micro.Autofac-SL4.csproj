@@ -69,6 +69,9 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile-->
+    <Compile Include="..\Caliburn.Micro.Autofac-NET4\EventAggregationAutoSubscriptionModule.cs">
+      <Link>EventAggregationAutoSubscriptionModule.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -62,6 +62,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Caliburn.Micro.Autofac-NET4\EventAggregationAutoSubscriptionModule.cs">
+      <Link>EventAggregationAutoSubscriptionModule.cs</Link>
+    </Compile>
     <Compile Include="AutofacBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
