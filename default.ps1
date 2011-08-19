@@ -53,7 +53,15 @@ task PublishToNuget -depends CreateNugetPackage {
   $accessKey = Get-Content $accessPath
   $accessKey = $accessKey.Trim()
   
-  exec { "nuget" "push -source http://packages.nuget.org/v1/ `"$sln_base.$version.nupkg`" $accessKey" }
+  if($nuget_push -eq "true") {
+    Write-Host "Pushing and Publishing to Nuget: $sln_base.$version.nupkg"
+   	&"nuget" push -source http://packages.nuget.org/v1/ "$sln_base.$version.nupkg" $accessKey
+  	#Exec { &"nuget" "push -source http://packages.nuget.org/v1/ `"$sln_base.$version.nupkg`" $accessKey" }
+  }
+  else {
+    Write-Host "Suppressing Push and Publishing to Nuget: $sln_base.$version.nupkg"
+  }
+
 }
 
 task CreateNugetPackage -depends Release {
@@ -96,7 +104,7 @@ task CreateNugetPackage -depends Release {
   $writer.Flush()
   $writer.Close()
   
-  exec { &"nuget" "pack $build_dir\NuPack\$sln_base.nuspec" }
+  exec { &"nuget" pack $build_dir\NuPack\$sln_base.nuspec }
 }
 
 task Release -depends CopyBuildFiles {
@@ -203,11 +211,12 @@ task Clean {
 
 task DisplayConfig {
 	Write-Host "Jenkins Build Number = $env:BUILD_NUMBER"
-  Write-Host "base_dir = $base_dir"
+	Write-Host "base_dir = $base_dir"
   Write-Host "target = $target"
-  Write-Host "config = $config"
+	Write-Host "config = $config"
   Write-Host "verbosity = $verbosity"
   Write-Host "sln_file = $sln_file"
   Write-Host "samples_sln_file = $samples_sln_file"
   Write-Host "version = $version"
+  Write-Host "nuget_push = $nuget_push"
 }
