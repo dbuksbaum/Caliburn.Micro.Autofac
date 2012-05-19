@@ -18,8 +18,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="src\Caliburn.Micro.Autofac-NET4\bin\Release\Caliburn.Micro.Autofac.dll" target="lib\net40\Caliburn.Micro.Autofac.dll" />
-    <file src="src\Caliburn.Micro.Autofac-SL4\bin\Release\Caliburn.Micro.Autofac.dll" target="lib\sl40\Caliburn.Micro.Autofac.dll" />
-    <file src="src\Caliburn.Micro.Autofac-WP7\bin\Release\Caliburn.Micro.Autofac.dll" target="lib\sl3-wp\Caliburn.Micro.Autofac.dll" />
+    <file src="lib\net40\Caliburn.Micro.Autofac.dll" target="lib\net40\Caliburn.Micro.Autofac.dll" />
+    <file src="lib\sl4\Caliburn.Micro.Autofac.dll" target="lib\sl4\Caliburn.Micro.Autofac.dll" />
+    <file src="lib\sl4-windowsphone71\Caliburn.Micro.Autofac.dll" target="lib\sl4-windowsphone71\Caliburn.Micro.Autofac.dll" />
   </files>
 </package>

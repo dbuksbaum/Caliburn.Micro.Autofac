@@ -80,7 +80,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y $(TargetDir)$(TargetFileName) $(SolutionDir)lib\sl3-wp\</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y $(TargetDir)$(TargetFileName) $(SolutionDir)lib\sl4-windowsphone71\</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
