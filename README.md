@@ -2,7 +2,7 @@ Caliburn.Micro.Autofac
 ======================
                        
 Source code to the [Caliburn.Micro.Autofac nuget package](http://nuget.org/List/Packages/Caliburn.Micro.Autofac).
-- [Caliburn.Micro.Autofac](http://buksbaum.us/2011/06/12/introducing-caliburn-micro-autofac/)
+- [Caliburn.Micro.Autofac](http://buksbaum.us/things-i-did/caliburn-micro-autofac/)
 - [Dave's blog](http://buksbaum.us/)
 
 __Version 1.4 - 2012/05/19__

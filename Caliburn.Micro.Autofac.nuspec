@@ -7,14 +7,14 @@
     <authors>David Buksbaum</authors>
     <owners />
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-    <projectUrl>http://buksbaum.us/2011/07/11/caliburn-micro-autofac-1-1-released/</projectUrl>
+    <projectUrl>http://buksbaum.us/things-i-did/caliburn-micro-autofac/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides an Autofac enabled bootstrapper for Caliburn.Micro.</description>
     <summary>Integration of Caliburn.Micro with Autofac. Source code with sample projects available at https://github.com/dbuksbaum/Caliburn.Micro.Autofac</summary>
     <tags>Caliburn.Micro Autofac IoC DI MVVM</tags>
     <dependencies>
-      <dependency id="Caliburn.Micro" version="1.2.0" />
-      <dependency id="Autofac" version="2.5.1.827" />
+      <dependency id="Caliburn.Micro" version="1.3.1" />
+      <dependency id="Autofac" version="2.6.1.841" />
     </dependencies>
   </metadata>
   <files>
