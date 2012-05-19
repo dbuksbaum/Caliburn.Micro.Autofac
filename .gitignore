@@ -30,13 +30,16 @@ Old
 release
 Release
 TestResults
+packages
+*.vs10x
 # Web publish log #
 ###################
 *.Publish.xml
-# Resharper #
+# JetBrains #
 #############
 _ReSharper.*
 *.resharper.user
+*.dotcover
 # Packages #
 ############
 # it’s better to unpack these files and commit the raw source
@@ -65,3 +68,7 @@ desktop.ini
 *.bak
 *.docstates
 *.user
+# we need nuget config #
+########################
+!repositories.config
+!nuget.exe
