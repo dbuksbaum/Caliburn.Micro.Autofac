@@ -125,9 +125,15 @@ namespace Caliburn.Micro.Autofac
       //builder.RegisterInstance<PhoneContainer>(this).InstancePerLifetimeScope();
       //builder.RegisterInstance<IPhoneContainer>(this).InstancePerLifetimeScope();
 
+      // The constructor of these services must be called
+      // to attach to the framework properly.
+      var phoneService = CreatePhoneApplicationServiceAdapter();
+      var navigationService = CreateFrameAdapter();
+
       //  register the singletons
-      builder.Register<INavigationService>(c => CreateFrameAdapter()).InstancePerLifetimeScope();
-      builder.Register<IPhoneService>(c => CreatePhoneApplicationServiceAdapter()).InstancePerLifetimeScope();
+      builder.Register<IPhoneContainer>(c => new AutofacPhoneContainer(c)).InstancePerLifetimeScope();
+      builder.RegisterInstance<INavigationService>(navigationService).SingleInstance();
+      builder.RegisterInstance<IPhoneService>(phoneService).SingleInstance();
       builder.Register<IEventAggregator>(c => CreateEventAggregator()).InstancePerLifetimeScope();
       builder.Register<IWindowManager>(c => CreateWindowManager()).InstancePerLifetimeScope();
       builder.Register<IVibrateController>(c => CreateVibrateController()).InstancePerLifetimeScope();
