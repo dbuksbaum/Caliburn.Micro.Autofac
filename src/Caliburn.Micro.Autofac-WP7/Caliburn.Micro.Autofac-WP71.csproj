@@ -71,6 +71,7 @@
       <Link>EventAggregationAutoSubscriptionModule.cs</Link>
     </Compile>
     <Compile Include="AutofacBootstrapper.cs" />
+    <Compile Include="AutofacPhoneContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
