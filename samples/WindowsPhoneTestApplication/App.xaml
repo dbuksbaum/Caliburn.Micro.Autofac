@@ -1,0 +1,10 @@
+﻿<Application x:Class="WindowsPhoneTestApplication.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Framework="clr-namespace:WindowsPhoneTestApplication.Framework">
+
+  <!--Application Resources-->
+  <Application.Resources>
+        <Framework:ApplicationBootstrapper x:Key="Boot1" />
+    </Application.Resources>
+</Application>
