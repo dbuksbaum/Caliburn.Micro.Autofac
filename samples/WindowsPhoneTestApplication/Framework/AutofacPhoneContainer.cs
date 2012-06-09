@@ -75,16 +75,16 @@ namespace Caliburn.Micro.Autofac
                     // Replace an object build by the container with one 
                     // from the phone state using OnActivating event.
                     aArgs =>
-                    {
-                        IPhoneService lInnerPhoneService =
-                            aArgs.Context.Resolve<IPhoneService>();
-
-                        if (lInnerPhoneService.State.ContainsKey(lObjectKey))
                         {
-                            object lInstance = lInnerPhoneService.State[lObjectKey];
-                            aArgs.ReplaceInstance(lInstance);
-                        }
-                    });
+                            IPhoneService lInnerPhoneService =
+                                aArgs.Context.Resolve<IPhoneService>();
+
+                            if (lInnerPhoneService.State.ContainsKey(lObjectKey))
+                            {
+                                object lInstance = lInnerPhoneService.State[lObjectKey];
+                                aArgs.ReplaceInstance(lInstance);
+                            }
+                        });
                 lBuilder.Update(Context.ComponentRegistry);
             }
         }
@@ -127,14 +127,14 @@ namespace Caliburn.Micro.Autofac
                 // Replace an object build by the container with one 
                 // from the application isolated storage using OnActivating event.
                 aArgs =>
-                {
-                    if (IsolatedStorageSettings.ApplicationSettings.Contains(lObjectKey))
                     {
-                        object lInstance =
-                            IsolatedStorageSettings.ApplicationSettings[lObjectKey];
-                        aArgs.ReplaceInstance(lInstance);
-                    }
-                });
+                        if (IsolatedStorageSettings.ApplicationSettings.Contains(lObjectKey))
+                        {
+                            object lInstance =
+                                IsolatedStorageSettings.ApplicationSettings[lObjectKey];
+                            aArgs.ReplaceInstance(lInstance);
+                        }
+                    });
             lBuilder.Update(Context.ComponentRegistry);
         }
 

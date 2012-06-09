@@ -128,11 +128,11 @@ namespace Caliburn.Micro.Autofac
             ContainerBuilder lBuilder = new ContainerBuilder();
 
             // Register phone services.
-            Assembly lCaliburnAssembly = typeof(IStorageMechanism).Assembly;
+            Assembly lCaliburnAssembly = typeof (IStorageMechanism).Assembly;
             // Register IStorageMechanism implementors.
             lBuilder.RegisterAssemblyTypes(lCaliburnAssembly)
                 .Where(
-                    aType => typeof(IStorageMechanism).IsAssignableFrom(aType)
+                    aType => typeof (IStorageMechanism).IsAssignableFrom(aType)
                              && !aType.IsAbstract
                              && !aType.IsInterface)
                 .As<IStorageMechanism>()
@@ -141,7 +141,7 @@ namespace Caliburn.Micro.Autofac
             // Register IStorageHandler implementors.
             lBuilder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
                 .Where(
-                    aType => typeof(IStorageHandler).IsAssignableFrom(aType)
+                    aType => typeof (IStorageHandler).IsAssignableFrom(aType)
                              && !aType.IsAbstract
                              && !aType.IsInterface)
                 .As<IStorageHandler>()
@@ -210,7 +210,7 @@ namespace Caliburn.Micro.Autofac
             // Build the container
             Container = lBuilder.Build();
             // Get the phone container instance.
-            PhoneContainer = (AutofacPhoneContainer)Container.Resolve<IPhoneContainer>();
+            PhoneContainer = (AutofacPhoneContainer) Container.Resolve<IPhoneContainer>();
             // Start the storage coordinator.
             StorageCoordinator lStorageCoordinator = Container.Resolve<StorageCoordinator>();
             lStorageCoordinator.Start();
@@ -273,7 +273,7 @@ namespace Caliburn.Micro.Autofac
         protected override IEnumerable<object> GetAllInstances(Type aService)
         {
             IEnumerable<object> lResult =
-                Container.Resolve(typeof(IEnumerable<>).MakeGenericType(aService)) as
+                Container.Resolve(typeof (IEnumerable<>).MakeGenericType(aService)) as
                 IEnumerable<object>;
             return lResult;
         }
@@ -311,7 +311,7 @@ namespace Caliburn.Micro.Autofac
             // By default, do not treat the view as loaded.
             TreatViewAsLoaded = false;
             // The default view model base type.
-            ViewModelBaseType = typeof(INotifyPropertyChanged);
+            ViewModelBaseType = typeof (INotifyPropertyChanged);
             // Default window manager.
             CreateWindowManager = () => new WindowManager();
             // Default event aggregator.
@@ -374,42 +374,42 @@ namespace Caliburn.Micro.Autofac
             ConventionManager.AddElementConvention<Pivot>(
                 ItemsControl.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
                 (aViewModelType, aPath, aProperty, aElement, aConvention) =>
-                {
-                    if (ConventionManager
-                        .GetElementConvention(typeof(ItemsControl))
-                        .ApplyBinding(aViewModelType, aPath, aProperty, aElement, aConvention))
                     {
-                        ConventionManager
-                            .ConfigureSelectedItem(
-                                aElement, Pivot.SelectedItemProperty, aViewModelType, aPath);
-                        ConventionManager
-                            .ApplyHeaderTemplate(
-                                aElement, Pivot.HeaderTemplateProperty, null, aViewModelType);
-                        return true;
-                    }
+                        if (ConventionManager
+                            .GetElementConvention(typeof (ItemsControl))
+                            .ApplyBinding(aViewModelType, aPath, aProperty, aElement, aConvention))
+                        {
+                            ConventionManager
+                                .ConfigureSelectedItem(
+                                    aElement, Pivot.SelectedItemProperty, aViewModelType, aPath);
+                            ConventionManager
+                                .ApplyHeaderTemplate(
+                                    aElement, Pivot.HeaderTemplateProperty, null, aViewModelType);
+                            return true;
+                        }
 
-                    return false;
-                };
+                        return false;
+                    };
 
             ConventionManager.AddElementConvention<Panorama>(
                 ItemsControl.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
                 (aViewModelType, aPath, aProperty, aElement, aConvention) =>
-                {
-                    if (ConventionManager
-                        .GetElementConvention(typeof(ItemsControl))
-                        .ApplyBinding(aViewModelType, aPath, aProperty, aElement, aConvention))
                     {
-                        ConventionManager
-                            .ConfigureSelectedItem(
-                                aElement, Panorama.SelectedItemProperty, aViewModelType, aPath);
-                        ConventionManager
-                            .ApplyHeaderTemplate(
-                                aElement, Panorama.HeaderTemplateProperty, null, aViewModelType);
-                        return true;
-                    }
+                        if (ConventionManager
+                            .GetElementConvention(typeof (ItemsControl))
+                            .ApplyBinding(aViewModelType, aPath, aProperty, aElement, aConvention))
+                        {
+                            ConventionManager
+                                .ConfigureSelectedItem(
+                                    aElement, Panorama.SelectedItemProperty, aViewModelType, aPath);
+                            ConventionManager
+                                .ApplyHeaderTemplate(
+                                    aElement, Panorama.HeaderTemplateProperty, null, aViewModelType);
+                            return true;
+                        }
 
-                    return false;
-                };
+                        return false;
+                    };
         }
 
         #endregion
