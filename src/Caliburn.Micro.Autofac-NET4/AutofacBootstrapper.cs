@@ -41,6 +41,9 @@ namespace Caliburn.Micro.Autofac
     public Func<IEventAggregator> CreateEventAggregator { get; set; }
     #endregion
 
+    public AutofacBootstrapper(bool useApplication = true) : base(useApplication) {
+    } 
+
     /// <summary>
     /// Do not override this method. This is where the IoC container is configured.
     /// <remarks>
