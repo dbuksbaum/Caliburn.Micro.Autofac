@@ -5,6 +5,9 @@ Source code to the [Caliburn.Micro.Autofac nuget package](http://nuget.org/List/
 - [Caliburn.Micro.Autofac](http://buksbaum.us/things-i-did/caliburn-micro-autofac/)
 - [Dave's blog](http://buksbaum.us/)
 
+__Version 1.4.2 - 2012/11/18__
+  * Updated Caliburn.Micro to 1.4
+
 __Version 1.4.1 - 2012/05/21__
   * Merged Windows Phone 7.1 fixes from distantcam (https://github.com/distantcam/Caliburn.Micro.Autofac)
 
