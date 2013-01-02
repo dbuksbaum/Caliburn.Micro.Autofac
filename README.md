@@ -5,6 +5,15 @@ Source code to the [Caliburn.Micro.Autofac nuget package](http://nuget.org/List/
 - [Caliburn.Micro.Autofac](http://buksbaum.us/things-i-did/caliburn-micro-autofac/)
 - [Dave's blog](http://buksbaum.us/)
 
+__Version 1.5.0 - 2013/01/02__
+  * Upgraded to Autofac 2.6.3.862
+  * Upgraded to Caliburn.Micro 1.4
+  * Upgraded solution / project files to VS2012
+  * Minimum WPF support is .NET 4
+  * Added support for Silverlight 5
+  * Changed NuGet packaging to be a project in the solutions
+  * Minor changes to the physical directory structure
+
 __Version 1.4.1 - 2012/05/21__
   * Merged Windows Phone 7.1 fixes from distantcam (https://github.com/distantcam/Caliburn.Micro.Autofac)
 

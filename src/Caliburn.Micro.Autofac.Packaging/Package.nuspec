@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Caliburn.Micro.Autofac</id>
+    <version>1.5.0</version>
+    <title>Caliburn.Micro.Autofac</title>
+    <authors>David Buksbaum</authors>
+    <owners>David Buksbaum</owners>
+    <projectUrl>http://buksbaum.us/2011/07/06/introducing-caliburn-micro-logging-nlog/</projectUrl>
+    <iconUrl>http://www.eyecatch.no/favicon.ico</iconUrl>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Provides an Autofac enabled bootstrapper for Caliburn.Micro.
+    </description>
+    <summary>
+      Integration of Caliburn.Micro with Autofac. Source code with sample projects available at https://github.com/dbuksbaum/Caliburn.Micro.Autofac
+    </summary>
+    <releaseNotes>
+      * Upgraded to Autofac 2.6.3.862
+      * Upgraded to Caliburn.Micro 1.4
+      * Upgraded solution / project files to VS2012
+      * Minimum WPF support is now .NET 4
+      * Added support for Silverlight 5
+      * Changed NuGet packaging to be a project in the solutions
+      * Minor changes to the physical directory structure
+    </releaseNotes>
+    <copyright>Copyright David Buksbaum 2009-2012</copyright>
+    <tags>Caliburn.Micro Autofac IoC DI MVVM</tags>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Caliburn.Micro" version="1.4" />
+      <dependency id="Autofac" version="2.6.3.862" />
+    </dependencies>
+    <references></references>
+  </metadata>
+  <files>
+    <file src="lib\**" target="lib" />
+    <!--file src="tools\" target="tools" />
+    <file src="content\" target="content" /-->
+  </files>
+</package>
