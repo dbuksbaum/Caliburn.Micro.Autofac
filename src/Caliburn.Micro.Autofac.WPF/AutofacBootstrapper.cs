@@ -145,6 +145,7 @@ namespace Caliburn.Micro.Autofac
     /// other statement or the behaviour is undefined.
     /// Current Defaults:
     ///   EnforceNamespaceConvention = true
+    ///   AutoSubscribeEventAggegatorHandlers = false
     ///   ViewModelBaseType = <see cref="System.ComponentModel.INotifyPropertyChanged"/> 
     ///   CreateWindowManager = <see cref="Caliburn.Micro.WindowManager"/> 
     ///   CreateEventAggregator = <see cref="Caliburn.Micro.EventAggregator"/>
@@ -152,7 +153,7 @@ namespace Caliburn.Micro.Autofac
     protected virtual void ConfigureBootstrapper()
     { //  by default, enforce the namespace convention
       EnforceNamespaceConvention = true;
-      // default is to auto subscribe known event aggregators
+      // default is to not auto subscribe known event aggregators
       AutoSubscribeEventAggegatorHandlers = false;
       //  the default view model base type
       ViewModelBaseType = typeof(System.ComponentModel.INotifyPropertyChanged);
