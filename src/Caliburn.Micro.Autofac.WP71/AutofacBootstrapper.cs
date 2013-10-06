@@ -1,12 +1,18 @@
-﻿using System;
+﻿// Project: Caliburn.Micro.Autofac
+// File name: AutofacBootstrapper.cs
+// File GUID: C5C743E2-7AD1-496C-824A-9AEFBF5F8979
+// Authors: David Buksbaum (david@buksbaum.us), Mike Eshva (mike@eshva.ru)
+// Date of creation: 20.05.2012
+
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using Autofac;
+using Microsoft.Phone.Controls;
+using IContainer = Autofac.IContainer;
 
 
 namespace Caliburn.Micro.Autofac
@@ -58,7 +64,8 @@ namespace Caliburn.Micro.Autofac
         /// </remarks>
         /// </summary>
         protected override void Configure()
-        { //  allow base classes to change bootstrapper settings
+        {
+            //  allow base classes to change bootstrapper settings
             ConfigureBootstrapper();
 
             //  validate settings
@@ -75,7 +82,7 @@ namespace Caliburn.Micro.Autofac
             if (CreateSoundEffectPlayer == null)
                 throw new ArgumentNullException("CreateSoundEffectPlayer");
 
-            //  configure container
+            // Configure container.
             var builder = new ContainerBuilder();
 
             //  register phone services
@@ -88,37 +95,46 @@ namespace Caliburn.Micro.Autofac
               .As<IStorageMechanism>()
               .InstancePerLifetimeScope();
 
-            //  register IStorageHandler implementors
-            builder.RegisterAssemblyTypes(caliburnAssembly)
+            // Register IStorageHandler implementors.
+            builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
               .Where(type => typeof(IStorageHandler).IsAssignableFrom(type)
                              && !type.IsAbstract
                              && !type.IsInterface)
               .As<IStorageHandler>()
               .InstancePerLifetimeScope();
 
-            //  register view models
+            // Register view models.
             builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
-                //  must be a type with a name that ends with ViewModel
-              .Where(type => type.Name.EndsWith("ViewModel"))
-                //  must be in a namespace ending with ViewModels
-              .Where(type => EnforceNamespaceConvention ? (!(string.IsNullOrEmpty(type.Namespace)) && type.Namespace.EndsWith("ViewModels")) : true)
+                // Must be a type with a name that ends with ViewModel.
+                .Where(type => type.Name.EndsWith("ViewModel"))
+                // Must be in a namespace ending with ViewModels.
+                .Where(
+                    type =>
+                    !EnforceNamespaceConvention ||
+                    (!string.IsNullOrEmpty(type.Namespace) &&
+                     type.Namespace.EndsWith("ViewModels")))
                 //  must implement INotifyPropertyChanged (deriving from PropertyChangedBase will statisfy this)
               .Where(type => type.GetInterface(ViewModelBaseType.Name, false) != null)
                 //  registered as self
               .AsSelf()
-                //  always create a new one
-              .InstancePerDependency();
+                .OnActivated(args => ActivateInstance(args.Instance))
+                // Always create a new one.
+                .InstancePerDependency();
 
-            //  register views
+            // Register views.
             builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
-                //  must be a type with a name that ends with View
-              .Where(type => type.Name.EndsWith("View"))
-                //  must be in a namespace that ends in Views
-              .Where(type => EnforceNamespaceConvention ? (!(string.IsNullOrEmpty(type.Namespace)) && type.Namespace.EndsWith("Views")) : true)
-                //  registered as self
-              .AsSelf()
-                //  always create a new one
-              .InstancePerDependency();
+                // Must be a type with a name that ends with View.
+                .Where(type => type.Name.EndsWith("View"))
+                // Must be in a namespace that ends in Views.
+                .Where(
+                    type =>
+                    !EnforceNamespaceConvention ||
+                    (!string.IsNullOrEmpty(type.Namespace) &&
+                     type.Namespace.EndsWith("Views")))
+                // Registered as self.
+                .AsSelf()
+                // Always create a new one.
+                .InstancePerDependency();
 
             //  register as CM container
             //builder.RegisterInstance<SimpleContainer>(this).InstancePerLifetimeScope();
@@ -141,19 +157,23 @@ namespace Caliburn.Micro.Autofac
             builder.RegisterType<StorageCoordinator>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<TaskController>().AsSelf().InstancePerLifetimeScope();
 
-            //  allow derived classes to add to the container
+            // Allow derived classes to add to the container.
             ConfigureContainer(builder);
 
-            //  build the container
+            // Build the container
             Container = builder.Build();
-
-            //  start services
-            Container.Resolve<StorageCoordinator>().Start();
-            Container.Resolve<TaskController>().Start();
-
-            //  add custom conventions for the phone
+            // Get the phone container instance.
+            PhoneContainer = (AutofacPhoneContainer)Container.Resolve<IPhoneContainer>();
+            // Start the storage coordinator.
+            StorageCoordinator storageCoordinator = Container.Resolve<StorageCoordinator>();
+            storageCoordinator.Start();
+            // Start the task controller.
+            TaskController taskController = Container.Resolve<TaskController>();
+            taskController.Start();
+            // Add custom conventions for the phone.
             AddCustomConventions();
         }
+
         /// <summary>
         /// Do not override unless you plan to full replace the logic. This is how the framework
         /// retrieves services from the Autofac container.
@@ -176,6 +196,7 @@ namespace Caliburn.Micro.Autofac
             }
             throw new Exception(string.Format("Could not locate any instances of contract {0}.", key ?? service.Name));
         }
+
         /// <summary>
         /// Do not override unless you plan to full replace the logic. This is how the framework
         /// retrieves services from the Autofac container.
@@ -210,34 +231,62 @@ namespace Caliburn.Micro.Autofac
         ///   CreateSoundEffectPlayer = <see cref="Caliburn.Micro.XnaSoundEffectPlayer"/>
         /// </summary>
         protected virtual void ConfigureBootstrapper()
-        { //  by default, enforce the namespace convention
+        {
+            // By default, enforce the namespace convention.
             EnforceNamespaceConvention = true;
-            //  by default, do not treat the view as loaded
+            // By default, do not treat the view as loaded.
             TreatViewAsLoaded = false;
-
-            //  the default view model base type
-            ViewModelBaseType = typeof(System.ComponentModel.INotifyPropertyChanged);
-            //  default window manager
+            // The default view model base type.
+            ViewModelBaseType = typeof(INotifyPropertyChanged);
+            // Default window manager.
             CreateWindowManager = () => new WindowManager();
-            //  default event aggregator
+            // Default event aggregator.
             CreateEventAggregator = () => new EventAggregator();
-            //  default frame adapter
+            // Default frame adapter.
             CreateFrameAdapter = () => new FrameAdapter(RootFrame, TreatViewAsLoaded);
-            //  default phone application service adapter
+            // Default phone application service adapter.
             CreatePhoneApplicationServiceAdapter = () => new PhoneApplicationServiceAdapter(PhoneService, RootFrame);
-            //  default vibrate controller
+            // Default vibrate controller.
             CreateVibrateController = () => new SystemVibrateController();
-            //  default sound effect player
+            // Default sound effect player.
             CreateSoundEffectPlayer = () => new XnaSoundEffectPlayer();
         }
+
         /// <summary>
-        /// Override to include your own Autofac configuration after the framework has finished its configuration, but 
-        /// before the container is created.
+        /// Override to include your own Autofac configuration after the framework has finished its
+        /// configuration, but  before the container is created.
         /// </summary>
-        /// <param name="builder">The Autofac configuration builder.</param>
+        /// <param name="builder">
+        /// The Autofac configuration builder.
+        /// </param>
         protected virtual void ConfigureContainer(ContainerBuilder builder)
         {
         }
+
+        /// <summary>
+        /// Activates an instance in phone container. Derived types should call this method for
+        /// registering types that should support storage mechanism.
+        /// </summary>
+        /// <param name="instance">
+        /// Instance to activate.
+        /// </param>
+        /// <remarks>
+        /// Use this method as event handler on service registation in 
+        /// <see cref="ConfigureContainer"/> method. ViewModels already registering with using it.
+        /// </remarks>
+        protected void ActivateInstance(object instance)
+        {
+            if (PhoneContainer == null)
+            {
+                return;
+            }
+
+            PhoneContainer.ActivateInstance(instance);
+        }
+
+
+        private AutofacPhoneContainer PhoneContainer { get; set; }
+
 
         static void AddCustomConventions()
         {
