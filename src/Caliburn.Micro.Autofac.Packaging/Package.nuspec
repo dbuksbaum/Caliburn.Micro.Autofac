@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Caliburn.Micro.Autofac</id>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <title>Caliburn.Micro.Autofac</title>
     <authors>David Buksbaum</authors>
     <owners>David Buksbaum</owners>
@@ -17,7 +17,7 @@
       Integration of Caliburn.Micro with Autofac. Source code with sample projects available at https://github.com/dbuksbaum/Caliburn.Micro.Autofac
     </summary>
     <releaseNotes>
-      * Added support for WP8
+      * Fixed tombstoning support for WP8
     </releaseNotes>
     <copyright>Copyright David Buksbaum 2009-2012</copyright>
     <tags>Caliburn.Micro Autofac IoC DI MVVM</tags>
