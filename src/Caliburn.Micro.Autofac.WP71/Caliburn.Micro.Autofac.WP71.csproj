@@ -67,6 +67,9 @@
     <Compile Include="..\Caliburn.Micro.Autofac.WPF\EventAggregationAutoSubscriptionModule.cs">
       <Link>EventAggregationAutoSubscriptionModule.cs</Link>
     </Compile>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AutofacBootstrapper.cs" />
     <Compile Include="AutofacPhoneContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
