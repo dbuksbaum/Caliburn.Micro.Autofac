@@ -47,10 +47,10 @@
       <HintPath>..\packages\Autofac.2.6.3.862\lib\SL4-WindowsPhone71\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro">
-      <HintPath>..\packages\Caliburn.Micro.1.4\lib\wp71\Caliburn.Micro.dll</HintPath>
+      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp71\Caliburn.Micro.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Extensions">
-      <HintPath>..\packages\Caliburn.Micro.1.4\lib\wp71\Caliburn.Micro.Extensions.dll</HintPath>
+      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp71\Caliburn.Micro.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
@@ -58,7 +58,7 @@
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.1.4\lib\wp71\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp71\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
@@ -66,6 +66,9 @@
   <ItemGroup>
     <Compile Include="..\Caliburn.Micro.Autofac.WPF\EventAggregationAutoSubscriptionModule.cs">
       <Link>EventAggregationAutoSubscriptionModule.cs</Link>
+    </Compile>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutofacBootstrapper.cs" />
     <Compile Include="AutofacPhoneContainer.cs" />
