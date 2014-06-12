@@ -17,7 +17,7 @@ using IContainer = Autofac.IContainer;
 
 namespace Caliburn.Micro.Autofac
 {
-    public class AutofacBootstrapper : PhoneBootstrapper
+    public class AutofacBootstrapper : PhoneBootstrapperBase
     {
         #region Properties
         protected IContainer Container { get; private set; }

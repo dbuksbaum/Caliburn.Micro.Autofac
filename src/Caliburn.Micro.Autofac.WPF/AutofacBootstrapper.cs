@@ -11,7 +11,7 @@ namespace Caliburn.Micro.Autofac
   /// A strongly-typed version of Caliburn.Micro.Bootstrapper that specifies the type of root model to create for the application.
   /// </summary>
   /// <typeparam name="TRootViewModel">The type of root view model for the application.</typeparam>
-  public class AutofacBootstrapper<TRootViewModel> : Bootstrapper<TRootViewModel>
+  public class AutofacBootstrapper<TRootViewModel> : BootstrapperBase
   {
     #region Properties
     protected IContainer Container { get; private set; }
