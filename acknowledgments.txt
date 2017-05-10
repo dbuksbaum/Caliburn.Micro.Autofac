@@ -1,4 +1,0 @@
-The Caliburn.Micro.Autofac project is making use of the following OSS projects:
-
-* Autofac (http://autofac.org/) - under the MIT license: http://www.opensource.org/licenses/mit-license.php
-* Caliburn.Micro (http://caliburnmicro.codeplex.com/) - under the MIT license: http://caliburnmicro.codeplex.com/license
