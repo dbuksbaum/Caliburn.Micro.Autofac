@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Caliburn.Micro.Autofac</id>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
     <title>Caliburn.Micro.Autofac</title>
     <authors>David Buksbaum</authors>
     <owners>David Buksbaum</owners>
@@ -18,7 +18,7 @@
     </summary>
     <releaseNotes>
       * Upgraded to Autofac 2.6.3.862
-      * Upgraded to Caliburn.Micro 1.4
+      * Upgraded to Caliburn.Micro 1.5.2
       * Upgraded solution / project files to VS2012
       * Minimum WPF support is now .NET 4
       * Added support for Silverlight 5
@@ -29,7 +29,7 @@
     <tags>Caliburn.Micro Autofac IoC DI MVVM</tags>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Caliburn.Micro" version="1.4" />
+      <dependency id="Caliburn.Micro" version="1.5.2" />
       <dependency id="Autofac" version="2.6.3.862" />
     </dependencies>
     <references></references>
